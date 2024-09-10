@@ -126,7 +126,7 @@ git checkout main
 git rebase tema_1
 ```
 ### Результат.
-![7 Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_1/pic/7.png)
+![7 Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_1/pic/7.1.png)
 
 ## Выводы.
 
