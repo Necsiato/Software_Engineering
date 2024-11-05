@@ -1,15 +1,15 @@
-# Тема 8. Введение в ООП
-Отчем по теме #8 выполнил(а):
+# Тема 9. Концепции и принципы ООП.
+Отчем по теме #9 выполнил(а):
 - Клейн Денис Романович
 - АИС-22-1
 
 | Задание | Лаб_раб | Сам_раб |
 | ------ | ------ | ------ |
 | Задание 1 | + | + |
-| Задание 2 | + | + |
-| Задание 3 | + | + |
-| Задание 4 | + | + |
-| Задание 5 | + | + |
+| Задание 2 | + | - |
+| Задание 3 | + | - |
+| Задание 4 | + | - |
+| Задание 5 | + | - |
 | Задание 6 | - | - |
 | Задание 7 | - | - |
 | Задание 8 | - | - |
@@ -22,324 +22,215 @@
 - к.э.н., доцент Панов М.А.
 
 ## Лабораторная работа №1
-### Создайте класс “Car” с атрибутами производитель и модель. Создайте объект этого класса. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями.
+### Допустим, что вы решили оригинально и немного странно познакомится с человеком. Для этого у вас должен быть написан свой класс на Python, который будет проверять угадал ваше имя человек или нет. Для этого создайте класс, указав в свойствах только имя. Дальше создайте функцию init(), а в ней сделайте проверку на то угадал человек ваше имя или нет. Также можете проверить что будет, если в этой функции указав атрибут, который не указан в вашем классе, например, попробуйте вызвать фамилию.
 
 ```python 
-#Создание класса
-class Car:
-    #Определение конструктора
-    def __init__(self, make, model):
-        #Определение атрибутов
-        self.make = make
-        self.model = model
-#Создание экземпляра класса
-my_car = Car("Toyota", "Corolla")
+class Ivan:
+    __slots__ = ['name']
+
+    def __init__(self, name):
+        if name == 'Иван':
+            self.name = f"Да, я {name}"
+        else:
+            self.name = f"Я не {name}, я Иван"
+
+person1 = Ivan('Алексей')
+person2 = Ivan('Иван')
+
+print(person1.name)
+print(person2.name)
 ```
 
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/1.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_9/pic/1.png)
 
 ## Лабораторная работа №2
-### Дополните код из первого задания, добавив в него атрибуты и методы класса, заставьте машину “поехать”. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
+### Вам дали важное задание, написать продавцу мороженого программу, которая будет писать добавили ли топпинг в мороженое и цену после возможного изменения. Для этого вам нужно написать класс, в котором будет определяться изменили ли состав мороженого или нет. В этом классе реализуйте метод, выводящий на печать «Мороженое с {ТОППИНГ}» в случае наличия добавки, а иначе отобразится следующая фраза: «Обычное мороженое». При этом программа должна воспринимать как топпинг только атрибуты типа string.
 
 ```python
-#Создание класса
-class Car:
-    #Определение конструктор
-    def __init__(self, make, model):
-        #Определение атрибутов
-        self.make = make
-        self.model = model
+class Icecream:
+    def __init__(self, ingredient = None):
+        if isinstance(ingredient, str):
+            self.ingredient = ingredient
+        else:
+            self.ingredient = None
 
-    #Создание метода, который выводит информацию в консоль
-    def drive(self):
-        print(f"Driving the {self.make} {self.model}")
+    def composition(self):
+        if self.ingredient:
+            print(f"Мороженое с {self.ingredient}")
+        else:
+            print("Обычное мороженое")
 
-#Создание экземпляра класса
-my_car = Car("Toyota", "Corolla")
-#Вызов метода
-my_car.drive()
+icecream = Icecream()
+icecream.composition()
+icecream = Icecream("шоколадом")
+icecream.composition()
+icecream = Icecream(5)
+icecream.composition()
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/2.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_9/pic/2.png)
 
 ## Лабораторная работа №3
-### Создайте новый класс “ElectricCar” с методом “charge” и атрибутом емкость батареи. Реализуйте его наследование от класса, созданного в первом задании. Заставьте машину поехать, а потом заряжаться. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
+### Петя – начинающий программист и на занятиях ему сказали реализовать икапсу…что-то. А вы хороший друг Пети и ко всему прочему прекрасно знаете, что икапсу…что-то – это инкапсуляция, поэтому решаете помочь вашему другу с написанием класса с инкапсуляцией. Ваш класс будет не просто инкапсуляцией, а классом с сеттером, геттером и деструктором. После написания класса вам необходимо продемонстрировать что все написанные вами функции работают. Также вам необходимо объяснить Пете почему на скриншоте ниже в консоли выводится ошибка.
 
 ```python
-#Создание класса
-class Car:
-    #Определение конструктора
-    def __init__(self, make, model):
-        #Определение атрибутов
-        self.make = make
-        self.model = model
+class MyClass:
+    def __init__(self, value):
+        self._value = value
 
-    #Создание метода, который выводит информацию в консоль
-    def drive(self):
-        print(f"Driving the {self.make} {self.model}")
+    def set_value(self, value):
+        self._value = value
 
-#Создание экземпляра класса
-my_car = Car("Toyota", "Corolla")
-#Вызов метода
-my_car.drive()
+    def get_value(self):
+        return self._value
 
-#Создание класса
-class ElectricCar(Car):
-    #Определение конструктора
-    def __init__(self, make, model, battery_capacity):
-        #Вызов конструктора родительского класса
-        super().__init__(make,model)
-        #Определение атрибута
-        self.battery_capacity = battery_capacity
-    #Создание метода зарядки
-    def charge(self):
-        print(f"Charging the {self.make} {self.model} with {self.battery_capacity} kWh")
-#Создание экземпляра класса
-my_electric_car = ElectricCar("Tesla", "Model S", 75)
-#Вызов метода drive() и charge()
-my_electric_car.drive()
-my_electric_car.charge()
+    def del_value(self):
+        del self._value
+
+    value = property(get_value, set_value, del_value, "Свойство value")
+
+example = MyClass(30)
+print(example.get_value())
+example.set_value(50)
+print(example.get_value())
+example.set_value(100)
+print(example.get_value())
+example.del_value()
+#Возникает ошибка, т.к. _value был удален методом del_value, а затем код пытается к нему обратиться через гетер.
+print(example.get_value())
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/3.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_9/pic/3.png)
 
 ## Лабораторная работа №4
-### Реализуйте инкапсуляцию для класса, созданного в первом задании. Создайте защищенный атрибут производителя и приватный атрибут модели. Вызовите защищенный атрибут и заставьте машину поехать. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
+### Вам прекрасно известно, что кошки и собаки являются млекопитающими, но компьютер этого не понимает, поэтому вам нужно написать три класса: Кошки, Собаки, Млекопитающие. И при помощи “наследования” объяснить компьютеру что кошки и собаки – это млекопитающие. Также добавьте какой-нибудь свой атрибут для кошек и собак, чтобы показать, что они чем-то отличаются друг от друга.
 
 ```python
-#Создание класса
-class Car:
-    #Определение конструктор
-    def __init__(self, make, model):
-        #Определение атрибутов
-        self._make = make
-        self.__model = model
+class Mammal:
+    className = "Mammal"
 
-    #Создание метода, который выводит информацию в консоль
-    def drive(self):
-        print(f"Driving the {self._make} {self.__model}")
+class Dog(Mammal):
+    species = 'canine'
+    sounds = 'wow'
 
-#Создание экземпляра класса
-my_car = Car("Toyota", "Corolla")
-#Доступ к защищенному атрибуту
-print(my_car._make)
-#__model вызовет ошибку, т.к. он приветный
-#Вызов метода drive()
-my_car.drive()
+class Cat(Mammal):
+    species = 'feline'
+    sounds = 'meow'
+
+dog = Dog()
+print(f"Dog is {dog.className}, but they say {dog.sounds}")
+cat = Cat()
+print(f"Cat is {cat.className}, but they say {cat.sounds}")
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/4.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_9/pic/4.png)
 
 ## Лабораторная работа №5
-### Реализуйте полиморфизм создав основной (общий) класс “Shape”, а также еще два класса “Rectangle” и “Circle”. Внутри последних двух классов реализуйте методы для подсчета площади фигуры. После этого создайте массив с фигурами, поместите туда круг и прямоугольник, затем при помощи цикла выведите их площади. Напишите комментарии для кода, объясняющие его работу. Результатом выполнения задания будет листинг кода с комментариями и получившийся вывод в консоль.
+### На разных языках здороваются по-разному, но суть остается одинаковой, люди друг с другом здороваются. Давайте вместе с вами реализуем программу с полиморфизмом, которая будет описывать всю суть первого предложения задачи. Для этого мы можем выбрать два языка, например, русский и английский и написать для них отдельные классы, в которых будет в виде атрибута слово, которым здороваются на этих языках. А также напишем функцию, которая будет выводить информацию о том, как на этих языках здороваются. Заметьте, что для решения поставленной задачи мы использовали декоратор @staticmethod, поскольку нам не нужны обязательные параметры-ссылки вроде self.
 
 ```python
-class Shape:
-    def area(self):
-        pass
+class Russian:
+    @staticmethod
+    def greeting():
+        print("Привет")
 
-class Rectangle(Shape):
-    # Метод инициализации класса
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
+class English:
+    @staticmethod
+    def greeting():
+        print("Hello")
 
-        # Метод для подсчета площади фигуры
-    def area(self):
-        return self.width * self.height
+def greet(language):
+    language.greeting()
 
-class Circle(Shape):
-    # Метод инициализации класса
-    def __init__(self, radius):
-        self.radius = radius
-
-    # Метод для подсчета площади фигуры
-    def area(self):
-        return 3.14 * self.radius * self.radius
-
-# Список
-arr = [Rectangle(2, 2), Circle(4)]
-# Вызов метода area
-for elem in arr:
-    print(elem.area())
+ivan = Russian()
+greet(ivan)
+john = English()
+greet(john)
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/5.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_9/Lab9_5.py)
 
 ## Самостоятельная работа №1
-### Самостоятельно создайте класс и его объект. Они должны отличаться, от тех, что указаны в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
+### Садовник и помидоры.
 
 ```python
-#Создание класса
-class Food:
-    #Определение конструктора
-    def __init__(self, name, calorie, price):
+class Tomato:
+    #Словарь состояний помидоров #
+    states = ['Отсутствие','Цветение','Зеленый','Красный']
+
+    #Инициализация Tomato, Index - Индекс (номер) томата, state - состояние (рост) томата.
+    def __init__(self, index):
+        self.index = index
+        self._state = 0
+
+    #Метод для увеличения стадии роста томата.
+    def grow(self):
+        self._state=self._state + 1
+
+    #Проверка стадии роста томата.
+    def is_ripe(self):
+        return self._state == 3
+
+class TomatoBush:
+    #Инициализация TomatoBush. num_tomato - кол-во томатов на кусте, tomatoes - список томатов на кусте.
+    def __init__(self, num_tomato):
+        self.tomatoes = [Tomato(index) for index in range (0, num_tomato)]
+
+    #Увеличивает стадию роста на 1.
+    def grow_all(self):
+        for tomato in self.tomatoes:
+            tomato.grow()
+
+    #Проверяет стадию роста у всех томатов на кусте
+    def all_are_ripe(self):
+        return all(tomato.is_ripe() for tomato in self.tomatoes)
+
+    #Очистка куста (списка) от томатов.
+    def give_away_all(self):
+        self.tomatoes.clear()
+
+class Gardener:
+    #Инициализация Gardener. name - имя садовника, plant - куст томатов.
+    def __init__(self, name, plant):
         self.name = name
-        self.calorie = calorie
-        self.price = price
-#Создание экземпляра класса
-milk = Food("milk",58, 100)
+        self._plant = plant
+
+    #Увеличивает стадию роста всех томатов на 1.
+    def work(self):
+        self._plant.grow_all()
+        print("Садовник работает...")
+
+    #Сбор урожая (всех зрелых помидоров) с куста
+    def harvest(self):
+        if self._plant.all_are_ripe():
+            self._plant.give_away_all()
+            print("Собрано")
+        else:
+            print("Не созрели")
+
+    #Вывод руководства
+    @staticmethod
+    def knowledge_base():
+        print("===РУКОВОДСТВО===\n1 - Посадить кусты с помидорами\n2 - Заставить садовника работать\n3 - Ухаживать за кустом\n4 - Собрать помидоры")
+
+#Создание куста с 5 помидорами
+bush = TomatoBush(5)
+#Создание садовника
+gardener = Gardener("Серега", bush)
+#Вызов справки
+Gardener.knowledge_base()
+
+gardener.work()
+gardener.harvest()
+
+gardener.work()
+gardener.work()
+gardener.harvest()
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/6.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_9/pic/6.png)
 
 ## Выводы.
-В данном коде создан класс Food с атрибутами name, calorie и price. 
-
-## Самостоятельная работа №2
-### Самостоятельно создайте атрибуты и методы для ранее созданного класса. Они должны отличаться, от тех, что указаны в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
-
-```python
-#Создание класса
-class Food:
-    #Определение конструктора
-    def __init__(self, name, calorie, price):
-        self.name = name
-        self.calorie = calorie
-        self.price = price
-
-    # Метод, который выводит информацию в консоль
-    def showinfo(self):
-        print(f"Название: {self.name}, Калорийность: {self.calorie}, Цена: {self.price}")
-
-    def eat(self):
-        pass
-
-#Создание экземпляра класса
-milk = Food("milk",58, 100)
-#Вызов функции showinfo()
-milk.showinfo()
-```
-### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/7.png)
-
-## Выводы.
-В данном коде создан класс Food с атрибутами name, calorie и price. Также есть 2 метода (showinfo() и eat()). showinfo выводит информацию.
-
-## Самостоятельная работа №3
-### Самостоятельно реализуйте наследование, продолжая работать с ранее созданным классом. Оно должно отличаться, от того, что указано в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
-
-```python
-#Создание класса
-class Food:
-    #Определение конструктора
-    def __init__(self, name, calorie, price):
-        self.name = name
-        self.calorie = calorie
-        self.price = price
-
-    # Метод, который выводит информацию в консоль
-    def showinfo(self):
-        print(f"Название: {self.name}, Калорийность: {self.calorie}, Цена: {self.price}")
-
-    def eat(self):
-        pass
-#Создание класса fpc (Ftas, Protein, Carbs)
-class Fpc(Food):
-    def __init__(self, name, calorie, price, fats, protein, carbs):
-        # Вызов конструктора родительского класса
-        super().__init__(name, calorie, price)
-        self.fats = fats
-        self.protein = protein
-        self.carbs = carbs
-
-    # Метод, который выводит информацию в консоль
-    def showtopic(self):
-        print(f"Название: {self.name}, Калорийность: {self.calorie}, Цена: {self.price}\n жиры: {self.fats}, белки: {self.protein}, углеводы: {self.carbs}")
-
-#Создание экземпляра класса
-milk = Food("milk",58, 100)
-#Вызов функции showinfo()
-milk.showinfo()
-
-#Создание экземпляра класса Fpc
-meat = Fpc("Meat", 230, 780, 18, 16,0)
-#Вызов функции showtopic()
-meat.showtopic()
-```
-### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/8.png)
-
-## Выводы.
-В данном коде создан класс Food с атрибутами name, calorie и price. Класс Food является родительским для класса Fpc с атрибутами fats, protein и carbs. Также создаются атрибуты milk и meat.
-
-## Самостоятельная работа №4
-### Самостоятельно реализуйте инкапсуляцию, продолжая работать с ранее созданным классом. Она должна отличаться, от того, что указана в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
-
-```python
-#Создание класса
-class Food:
-    #Определение конструктора
-    def __init__(self, name, calorie, price):
-        self.name = name
-        self._calorie = calorie
-        self.__price = price
-
-    # Метод, который выводит информацию в консоль
-    def showinfo(self):
-        print(f"Название: {self.name}, Калорийность: {self._calorie}, Цена: {self.__price}")
-
-    def eat(self):
-        pass
-
-#Создание экземпляра класса
-milk = Food("milk",58, 100)
-milk._calorie = 60
-#__price не изменится, т.к. атрибут приватный.
-milk.__price = 120
-#Вызов функции showinfo()
-milk.showinfo()
-```
-### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/9.png)
-
-## Выводы.
-В данном коде реализована инкапсуляция. В классе Food есть защищенный _calorie и приватный __price. После создается milk и выводится информация о нём.
-
-## Самостоятельная работа №5
-### Самостоятельно реализуйте полиморфизм. Он должен отличаться, от того, что указан в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
-
-```python
-#Создание класса
-class Food:
-    def info(self):
-        pass
-
-class Fats(Food):
-    # Метод инициализации класса
-    def __init__(self, fats):
-        self.fats = fats
-
-    # Вывод информации
-    def info(self):
-        print(f"Жиры {self.fats}")
-
-
-class Protein(Food):
-    # Метод инициализации класса
-    def __init__(self, protein):
-        self.protein = protein
-    # Вывод информации
-    def info(self):
-        print(f"Белки {self.protein}")
-
-
-class Carbs(Food):
-    # Метод инициализации класса
-    def __init__(self, carbs):
-        self.carbs = carbs
-    # Вывод информации
-    def info(self):
-        print(f"Углеводы {self.carbs}")
-
-meat = [Fats(10), Protein(20), Carbs(30)]
-for food in meat:
-    food.info()
-```
-### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/10.png)
-
-## Выводы.
-В данном коде реализован полиморфизм с использованием основного класса Food и классов Fats, Protein и Carbs. Они имеют общий метод info (выводит информацию). В зависимости от класса метод переопределяется. После создается список с объектами классов и для каждого из них вызывается метод info.
+В данном коде реализованы классы, в которых реализован процесс ухода за кустом с помидорами. Класс Tomato - отвечает за каждый единичный помидор (Его рост и стадия созревания), TomatoBush - за куст, на котором растут помидоры, Gardener - за садовника, который ухаживает за кустом с помидорами, а также может собирать урожай. Также реализовано руковосдтво, которое можно вызвать. В конце реализованы методы, которые тестируют код на работоспособность. 
 
