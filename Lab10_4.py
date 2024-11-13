@@ -7,7 +7,9 @@ def check_name(name):
     else:
         print('Успешная регистрация')
 
-
 if __name__ == '__main__':
-    name = '12345678910'
+    name = '12345'
     check_name(name)
+
+    name1 = '12345678910'
+    check_name(name1)
