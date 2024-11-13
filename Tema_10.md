@@ -40,7 +40,7 @@ if __name__ == '__main__':
 ```
 
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/1.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/1.png)
 
 ## Лабораторная работа №2
 ### Илья пишет свой сайт и ему необходимо сделать минимальную проверку ввода данных пользователя при регистрации. Для этого он реализовал функцию, которая выводит данные пользователя на экран и решил, что будет проверять правильность введённых данных при помощи декоратора, но в этом ему потребовалась ваша помощь. Напишите декоратор для функции, который будет принимать все параметры вызываемой функции (имя, возраст) и проверять чтобы возраст был больше 0 и меньше 130. Причем заметьте, что неважно сколько пользователь введет данных на сайт к Илье, будут обрабатываться только первые 2 аргумента.
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     personal_info('Мария', 138, 15, 48, 2)
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/2.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/2.png)
 
 ## Лабораторная работа №3
 ### Вам понравилась идея Ильи с сайтом, и вы решили дальше работать вместе с ним. Но вот в вашем проекте появилась проблема, кто-то пытается сломать вашу функцию с получением данных для сайта. Эта функция работает только с данными integer, а какой-то недохакер пытается все сломать и вместо нужного типа данных отправляет string. Воспользуйтесь исключениями, чтобы неподходящий тип данных не ломал ваш сайт. Также дополнительно можете обернуть весь код функции в try/except/finally для того, чтобы программа вас оповестила о том, что выявлена какая-то ошибка или программа успешно выполнена.
@@ -92,7 +92,7 @@ if __name__ == '__main__':
     data([1, 15, 'Hello', 'i', 'try', 'to', 'crash', 'your', 'site', 38, 45])
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/3.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/3.png)
 
 ## Лабораторная работа №4
 ### Продолжая работу над сайтом, вы решили написать собственное исключение, которое будет вызываться в случае, если в функцию проверки имени при регистрации передана строка длиннее десяти символов, а если имя имеет допустимую длину, то в консоль выводиться “Успешная регистрация”
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     check_name(name)
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/4.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/4.png)
 
 ## Лабораторная работа №5
 ### После запуска сайта вы поняли, что вам необходимо добавить логгер, для отслеживания его работы. Готовыми вариантами вы не захотели пользоваться, и поэтому решили создать очень простую пародию. Для этого создали две функции: init() (вызывается при создании класса декоратора в программе) и call() (вызывается при вызове декоратора). Создайте необходимый вам декоратор. Выведите все логи в консоль.
@@ -139,65 +139,182 @@ if __name__ == '__main__':
     print('>> Сайт выключен')
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/5.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/5.png)
 
 ## Самостоятельная работа №1
 ### Вовочка решил заняться спортивным программированием на python, но для этого он должен знать за какое время выполняется его программа. Он решил, что для этого ему идеально подойдет декоратор для функции, который будет выяснять за какое время выполняется та или иная функция. Помогите Вовочке в его начинаниях и напишите такой декоратор. Подсказка: необходимо использовать модуль time Декоратор необходимо использовать для этой функции:
 ### Результатом вашей работы будет листинг кода и скриншот консоли, в котором будет выполненная функция Фибоначчи и время выполнения программы. Также на этом примере можете посмотреть, что решение задач через рекурсию не всегда является хорошей идеей. Поскольку решение Фибоначчи для 100 с использованием рекурсии и без динамического программирования решается более десяти секунд, а решение точно такой же задачи, но через цикл for еще и для 200, занимает меньше 1 секунды.
 ```python
+import time
 
+def time_counter(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"\nExecution time: {execution_time} seconds")
+        return result
+    return wrapper
+
+@time_counter
+def fibonacci():
+    fib1 = fib2 = 1
+
+    for i in range(2, 200):
+        fib1, fib2 = fib2, fib1 + fib2
+        print(fib2, end = ' ')
+
+if __name__ == '__main__':
+    fibonacci()
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/6.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/6.png)
 
 ## Выводы.
-В данном коде создан класс Food с атрибутами name, calorie и price. 
+В данном коде реализован декоратор для fibonacci, который вычисляет число Фибоначчи. Он подсчитывает время выполнения функции.
 
 ## Самостоятельная работа №2
 ### Посмотрев на Вовочку, вы также загорелись идеей спортивного программирования, начав тренировки вы узнали, что для решения некоторых задач необходимо считывать данные из файлов. Но через некоторое время вы столкнулись с проблемой что файлы бывают пустыми, и вы не получаете вводные данные для решения задачи. После этого вы решили не просто считывать данные из файла, а всю конструкцию оборачивать в исключения, чтобы избежать такой проблемы. Создайте пустой файл и файл, в котором есть какая-то информация. Напишите код программы. Если файл пустой, то, нужно вызвать исключение (“бросить исключение”) и вывести в консоль “файл пустой”, а если он не пустой, то вывести информацию из файла.
 
 ```python
+def read_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            gen = file.read()
+            if not gen:
+                raise ValueError("The file is empty")
+            print(gen)
+    except ValueError as ex:
+        print(ex)
+    except Exception as e:
+        print(f"Ошибка: {e}")
 
+if __name__ == '__main__':
+    print("Reading from a filled file:")
+    read_file("notemptyspace")
+
+    print("Reading from a empty file:")
+    read_file("emptyspace.txt")
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/7.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/7.png)
 
 ## Выводы.
-В данном коде создан класс Food с атрибутами name, calorie и price. Также есть 2 метода (showinfo() и eat()). showinfo выводит информацию.
+В коде показана работа функции read_file, который вызывает исключение (try/except), если файл пустой.
 
 ## Самостоятельная работа №3
 ### Напишите функцию, которая будет складывать 2 и введенное пользователем число, но если пользователь введет строку или другой неподходящий тип данных, то в консоль выведется ошибка “Неподходящий тип данных. Ожидалось число.”. Реализовать функционал программы необходимо через try/except и подобрать правильный тип исключения. Создавать собственное исключение нельзя. Проведите несколько тестов, в которых исключение вызывается и нет. Результатом выполнения задачи будет листинг кода и получившийся вывод в консоль.
 
 ```python
-
+def add_two(user_input):
+    try:
+        num = int(user_input)
+        return 2 + num
+    except ValueError:
+        print("Invalid data type. Expected a number.")
+print(add_two("2"))
+add_two("string")
+add_two("5.23")
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/8.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/8.png)
 
 ## Выводы.
-В данном коде создан класс Food с атрибутами name, calorie и price. Класс Food является родительским для класса Fpc с атрибутами fats, protein и carbs. Также создаются атрибуты milk и meat.
+В данном коде реализована функция add_two, которая возвращает увеличенное на 2 число, которое поступило на вход.
 
 ## Самостоятельная работа №4
 ### Создайте собственный декоратор, который будет использоваться для двух любых вами придуманных функций. Декораторы, которые использовались ранее в работе нельзя воссоздавать. Результатом выполнения задачи будет: класс декоратора, две как-то связанными с ним функциями, скриншот консоли с выполненной программой и подробные комментарии, которые будут описывать работу вашего кода.
 
 ```python
+import time
 
+def log_execution_time(func):
+    def wrapper(*args, **kwargs):
+        #время начала выполнения
+        start_time = time.time()
+        #оригинальную функцию
+        result = func(*args, **kwargs)
+        #время окончания выполнения
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"Execution time of function '{func.__name__}': {execution_time:.5f} seconds")
+        return result
+    return wrapper
+
+# Функция для вычисления факториала
+@log_execution_time
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * factorial(n - 1)
+
+# Функция для вычисления суммы квадратов чисел от 1 до n
+@log_execution_time
+def sum_of_squares(n):
+    return sum(i ** 2 for i in range(1, n + 1))
+
+def measure_execution_time(func):
+    start_time = time.time()  # Засекаем время начала
+    func()  # Выполняем функцию
+    end_time = time.time()  # Засекаем время конца
+    execution_time = end_time - start_time  # Разница времени
+
+    print(f"Execution time: {execution_time:.5f} seconds")
+# Вызов функций для проверки работы
+factorial_result = factorial(100)
+print(f"Factorial: {factorial_result}")
+
+sum_of_squares_result = sum_of_squares(100)
+print(f"Sum of squares from 1 to 10: {sum_of_squares_result}")
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/9.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/9.png)
 
 ## Выводы.
-В данном коде реализована инкапсуляция. В классе Food есть защищенный _calorie и приватный __price. После создается milk и выводится информация о нём.
+Данный код использует декоратор log_execution_time для измерения времени выполнения функций factorial и sum_of_squares. 
 
 ## Самостоятельная работа №5
 ### Самостоятельно реализуйте полиморфизм. Он должен отличаться, от того, что указан в теоретическом материале (методичке) и лабораторных заданиях. Результатом выполнения задания будет листинг кода и получившийся вывод консоли.
 
 ```python
+class FutureError(Exception):
+    def __init__(self, message="An error occurred!"):
+        self.message = message
+        super().__init__(self.message)
 
+# Первая функция: деление на ноль
+def perform_division(x, y):
+    try:
+        if y == 0:
+            raise FutureError("Error: division by zero!")
+        return x / y
+    except FutureError as e:
+        print(f"Error in perform_division function: {e}")
+        return None
+
+# Вторая функция: проверка пустой строки
+def validate_string(input_str):
+    try:
+        if not input_str:
+            raise FutureError("Error: empty string!")
+        return input_str.upper()
+    except FutureError as e:
+        print(f"Error in validate_string function: {e}")
+        return None
+
+if __name__ == "__main__":
+    # Вызов функций
+    # Это вызовет ошибку деления на ноль
+    result1 = perform_division(10, 0)
+    print(result1)
+    # Это вызовет ошибку пустой строки
+    result2 = validate_string("")
+    print(result2)
 ```
 ### Результат.
-![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_8/pic/10.png)
+![Задание](https://github.com/Necsiato/Software_Engineering/blob/Tema_10/pic/10.png)
 
 ## Выводы.
-В данном коде реализован полиморфизм с использованием основного класса Food и классов Fats, Protein и Carbs. Они имеют общий метод info (выводит информацию). В зависимости от класса метод переопределяется. После создается список с объектами классов и для каждого из них вызывается метод info.
+В данном коде вызываются ошибки в двух функциях, используя собственное исключение FutureError. При делении на ноль и проверке пустой строки появляются соответствующие исключения, которые выводят сообщения об ошибках. 
 
